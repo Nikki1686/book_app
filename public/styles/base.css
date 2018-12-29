@@ -9,6 +9,14 @@ h1 {
   margin: 20px;
 }
 
+h3 {
+  font-size: 125%;
+}
+
 h3, p, input, label, button, ul {
   margin: 10px;
+}
+
+em {
+  font-style: italic;
 }
