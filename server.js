@@ -17,7 +17,15 @@ client.on('error', err => console.error(err));
 
 //app
 const app = express();
+app.set('view engine', 'ejs');
+
 app.use(cors());
+app.use(express.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/public'));
+
+app.get('/', home);
+
+app.get('/hello', home);
 
 function home(request, response){
   response.render('pages/index');
