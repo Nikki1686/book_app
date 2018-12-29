@@ -1,48 +1,39 @@
 'use strict';
 
+//App Dependencies
 const express = require('express');
-
+const cors = require('cors');
 const superagent = require('superagent');
+const pg = require('pg');
 
+//Load env vars;
+require('dotenv').config();
+const PORT = process.env.PORT || 3004;
+
+//postgres
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+client.on('error', err => console.error(err));
+
+//app
 const app = express();
-app.use(express.urlencoded({extended: true}));
-
-app.set('view engine', 'ejs');
-
-const PORT = process.env.PORT || 3000;
-
-app.get('/', home);
-
-app.post('/searches', search)
-
+app.use(cors());
 
 function home(request, response){
   response.render('pages/index');
 }
 
-function search(request, response){
-  const searchStr = request.body.search[0];
-  const searchType = request.body.search[1];
-  let url = 'https://www.googleapis.com/books/v1/volumes?q=';
+// Error messages
+app.get('/*', function(request, response) {
+  response.status(404).send('halp, you are in the wrong place');
+});
 
-  if(searchType === 'title'){
-    url += `+intitle:${searchStr}`;
-  } else if(searchType === 'author'){
-    url += `+inauthor:${searchStr}`
-  }
-
-  return superagent.get(url)
-    .then(result => {
-      let books = result.body.items.map(book => new Book(book));
-      response.render('pages/show', {books});
-    })
-
+// Error handler
+function handleError(err, res) {
+  console.error(err);
+  if (res) res.status(500).send('Sorry, something went wrong');
 }
 
-function Book(book){
-  console.log(book);
-  this.title = book.volumeInfo.title || 'this book does not have a title';
-  this.placeholderImage = 'https://i.imgur.com/J5LVHEL.jpeg';
-}
-
-app.listen(PORT, () => console.log(`APP is up on PORT : ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`app is up on port : ${PORT}`);
+});
