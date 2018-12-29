@@ -8,3 +8,7 @@ h1 {
   font-size: 200%;
   margin: 20px;
 }
+
+h3, p, input, label, button {
+  margin: 10px;
+}

@@ -8,7 +8,7 @@ const pg = require('pg');
 
 //Load env vars;
 require('dotenv').config();
-const PORT = process.env.PORT || 3004;
+const PORT = process.env.PORT || 3000;
 
 //postgres
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -24,11 +24,42 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', home);
+app.get('/hello', hello);
+app.post('/searches', search);
 
-app.get('/hello', home);
 
 function home(request, response){
   response.render('pages/index');
+}
+
+function hello(request, response){
+  response.render('pages/index');
+}
+
+function search(request, response){
+  const searchStr = request.body.search[0];
+  const searchType = request.body.search[1];
+  let url = 'https://www.googleapis.com/books/v1/volumes?q=';
+
+  if(searchType === 'title'){
+    url += `+intitle:${searchStr}`;
+  } else if(searchType === 'author'){
+    url += `+inauthor:${searchStr}`
+  }
+
+  return superagent.get(url)
+    .then(result => {
+      let books = result.body.items.map(book => new Book(book));
+      console.log(books);
+      response.render('pages/searches/shows', {books});
+    });
+
+}
+
+function Book(book){
+  // console.log(book);
+  this.title = book.volumeInfo.title || 'this book does not have a title';
+  this.placeholderImage = 'https://i.imgur.com/J5LVHEL.jpeg';
 }
 
 // Error messages
