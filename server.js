@@ -49,17 +49,16 @@ function search(request, response){
 
   return superagent.get(url)
     .then(result => {
+      // console.log(result.body.items[0]);
       let books = result.body.items.map(book => new Book(book));
-      console.log(books);
       response.render('pages/searches/shows', {books});
     });
 
 }
 
 function Book(book){
-  // console.log(book);
-  this.title = book.volumeInfo.title || 'this book does not have a title';
-  this.placeholderImage = 'https://i.imgur.com/J5LVHEL.jpeg';
+  this.title = book.volumeInfo.title || 'No title provided';
+  this.placeholderImage = book.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpeg';
 }
 
 // Error messages
