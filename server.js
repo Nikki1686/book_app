@@ -49,10 +49,10 @@ function search(request, response){
 
   return superagent.get(url)
     .then(result => {
-      // console.log(result.body.items[0]);
       let books = result.body.items.map(book => new Book(book));
       response.render('pages/searches/shows', {books});
-    });
+    })
+    .catch(err => handleError(err, response));
 
 }
 
@@ -63,13 +63,13 @@ function Book(book){
 
 // Error messages
 app.get('/*', function(request, response) {
-  response.status(404).send('halp, you are in the wrong place');
+  response.status(404).send('you are in the wrong place bozo');
 });
 
 // Error handler
 function handleError(err, res) {
   console.error(err);
-  if (res) res.status(500).send('Sorry, something went wrong');
+  if (res) res.status(500).render('pages/error');
 }
 
 app.listen(PORT, () => {
