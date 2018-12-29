@@ -1,1 +1,10 @@
 /* base */
+body {
+  background-color: aquamarine;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 200%;
+  margin: 20px;
+}
