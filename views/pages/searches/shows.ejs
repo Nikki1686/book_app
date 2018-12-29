@@ -14,8 +14,10 @@
   <ul>
     <% books.forEach(book => { %>
       <li>
+        <img src=<%=book.image %>>
         <h3><%= book.title %></h3>
-        <img src=<%=book.placeholderImage %>>
+        <p><em><%= book.author %></em></p>
+        <p><%= book.description %></p>
       </li>
     <% }) %>
   </ul>

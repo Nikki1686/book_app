@@ -49,6 +49,7 @@ function search(request, response){
 
   return superagent.get(url)
     .then(result => {
+      console.log(result.body.items[0]);
       let books = result.body.items.map(book => new Book(book));
       response.render('pages/searches/shows', {books});
     })
@@ -58,7 +59,9 @@ function search(request, response){
 
 function Book(book){
   this.title = book.volumeInfo.title || 'No title provided';
-  this.placeholderImage = book.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpeg';
+  this.author = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown';
+  this.image = book.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpeg';
+  this.description = book.volumeInfo.description || 'No description provided.';
 }
 
 // Error messages
