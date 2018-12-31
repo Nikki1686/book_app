@@ -1,68 +1,98 @@
 /* base */
-@media screen and (min-width: 768px) {
-  body {
-      width: 960px;
-  }
-}
-html, body {
-  background-color: lightgray;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  background-color: #777;
 }
 
 header {
-  font-size: 100%;
-  color: white;
-  background-color: black;
-
+  font-size: 200%;
+  color: #eee;
+  background-color: #111;
+  padding: 20px;
+  text-align: left;
 }
-body {
-  background-color: rgb(86, 91, 89);
-  font-family: Arial, Helvetica, sans-serif;
+
+section {
+  background-color: #444;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #eee;
+  font-size: 130%;
+}
+
+main {
+  background-color: #777;
 }
 
 h3 {
-  font-size: 90%;
-  color: white;
+  font-size: 110%;
+  color: #eee;
+  text-shadow: 1px 1px #111;
 }
 
-h3, p, input, label, button, ul {
-  margin: 10px;
+.text-input, fieldset, button {
+  width: 80%;
+  border-radius: 5px;
+  margin:  30px auto 0 auto;
+  height: 70px;
+  box-sizing: border-box;
+  font-size: 100%;
 }
 
-#title-field {
-  text-align: center;
+button {
+  background-color: #111;
+  color: #eee;
+  border: #111;
 }
 
-#title {
+.text-input {
+  padding-left: 20px;
+}
+
+fieldset {
+  text-align: left;
+  background-color: #ccc;
+  padding-top: 13px;
+  padding-left: 20px;
+}
+
+.radio-button {
+  margin-left: 20px;
+}
+
+li {
+  background-color: #777;
+  padding: 20px 50px 20px 50px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+
+
+/* #title {
   font-size: 100%;
   text-align: left;
   color: black;
   background-color: rgb(139, 140, 139);
   padding: 3%;
   border-radius: 5px;
-}
-#author-field {
-  text-align: center;
-  /* font-size: 80%;
-  color: white;
-  background-color: black;
-  padding: 3%;
-  border: none;
-  border-radius: 5px; */
+} */
 
-}
-#author {
+/* #author {
   font-size: 100%;
   text-align: left;
   color: black;
   background-color: rgb(139, 140, 139);
   padding: 3%;
   border-radius: 5px;
-}
-footer {
-  text-align: center;
-}
+} */
 
-footer button {
+/* button {
   text-align: center;
   font-size: 80%;
   color: white;
@@ -70,4 +100,4 @@ footer button {
   padding: 3%;
   border: none;
   border-radius: 5px;
-}
+} */

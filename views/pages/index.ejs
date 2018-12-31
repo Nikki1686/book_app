@@ -12,31 +12,27 @@
   <h1>Best Books!</h1>
 </header>
 <body>
+  <section>
+    <h2>Search by Title or Author</h2>
+  </section>
   <main>
-    <h3>Search by Title or Author</h3>
-    <div id="form">
+
     <form action="/searches" method="post">
-      <input type="text" name="search" placeholder="Enter a title or author" required>
-      </div>
+      <input class="text-input" type="text" name="search" placeholder="Enter a title or author" required>
+
       <fieldset id="title-field">
         <label for="title">
-          <div id="title">
           <span>Title</span>
-          <input type="radio" name="search" value="title" required>
-          </div>
+          <input class="radio-button" type="radio" name="search" value="title" required>
         </label>
       </fieldset>
       <fieldset id="author-field">
         <label for="author">
-          <div id="author">
           <span>Author</span>
-          <input type="radio" name="search" value="author" required>
-          </div>
+          <input class="radio-button" type="radio" name="search" value="author" required>
         </label>
       </fieldset>
-      <footer>
         <button type="submit">Search the Google Books API</button>
-      </footer>
     </form>
   </main>
 </body>
