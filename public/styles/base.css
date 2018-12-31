@@ -1,73 +1,136 @@
 /* base */
-@media screen and (min-width: 768px) {
-  body {
-      width: 960px;
-  }
-}
+
 html, body {
-  background-color: lightgray;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  background-color: #777;
 }
 
 header {
-  font-size: 100%;
-  color: white;
-  background-color: black;
+  color: #eee;
+  background-color: #000;
+  padding: 20px;
+  text-align: left;
 
 }
-body {
-  background-color: rgb(86, 91, 89);
-  font-family: Arial, Helvetica, sans-serif;
+
+header img {
+  width: 50px;
+  float: right;
+}
+
+h1 {
+  font-size: 200%;
+}
+
+h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+section {
+  background-color: #444;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #eee;
+  font-size: 130%;
+}
+
+main {
+  background-color: #777;
+  min-height: 100%;
+  margin-bottom: -50px;
 }
 
 h3 {
+  font-size: 120%;
+  color: #eee;
+  text-shadow: 1px 1px #111;
+}
+
+.text-input, fieldset, button {
+  width: 80%;
+  border-radius: 5px;
+  margin:  30px auto 0 auto;
+  height: 70px;
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+button {
+  background-color: #111;
+  color: #eee;
+  border: #111;
+}
+
+.text-input {
+  padding-left: 20px;
+}
+
+fieldset {
+  text-align: left;
+  background-color: #ccc;
+  padding-top: 25px;
+  padding-left: 20px;
+}
+
+.radio-button {
+  margin-left: 20px;
+}
+
+li {
+  background-color: #bbb;
+  padding: 30px 70px 30px 70px;
+  margin: 40px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 1px #555;
+}
+
+li img, li p {
+  margin-bottom: 20px;
+}
+
+em {
+  font-style: italic;
+}
+
+li h3 {
+  margin-bottom: 10px;
+}
+
+li p {
+  color: #333;
+}
+
+li p:nth-child(3) {
   font-size: 90%;
-  color: white;
 }
 
-h3, p, input, label, button, ul {
-  margin: 10px;
-}
-
-#title-field {
-  text-align: center;
-}
-
-#title {
-  font-size: 100%;
+li p:last-child {
   text-align: left;
-  color: black;
-  background-color: rgb(139, 140, 139);
-  padding: 3%;
-  border-radius: 5px;
 }
-#author-field {
-  text-align: center;
-  /* font-size: 80%;
-  color: white;
-  background-color: black;
-  padding: 3%;
-  border: none;
-  border-radius: 5px; */
 
-}
-#author {
-  font-size: 100%;
-  text-align: left;
-  color: black;
-  background-color: rgb(139, 140, 139);
-  padding: 3%;
-  border-radius: 5px;
-}
 footer {
-  text-align: center;
+  background-color: #000;
+  height: 50px;
+  position: relative;
+  bottom: 0px;
+  display: flex;
+  justify-content: space-around;
 }
 
-footer button {
-  text-align: center;
-  font-size: 80%;
-  color: white;
-  background-color: black;
-  padding: 3%;
-  border: none;
-  border-radius: 5px;
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #555;
+  margin-top: 10px;
 }

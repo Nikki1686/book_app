@@ -9,17 +9,30 @@
   <title>Shows</title>
 </head>
 <body>
-  <h1>Thank you for your search</h1>
-
-  <ul>
-    <% books.forEach(book => { %>
-      <li>
-        <img src=<%=book.image %>>
-        <h3><%= book.title %></h3>
-        <p><em><%= book.author %></em></p>
-        <p><%= book.description %></p>
-      </li>
-    <% }) %>
-  </ul>
+  <header>
+    <img src="images/hamburger.png" alt="">
+    <h1><a href="/">Best Books!</a></h1>
+  </header>
+  <section>
+    <h2>Search Results</h2>
+  </section>
+  <main>
+    <ul>
+      <% books.forEach(book => { %>
+        <li>
+          <img src=<%=book.image %>>
+          <h3><%= book.title %></h3>
+          <p><em><%= book.author %></em></p>
+          <p><%= book.description %></p>
+        </li>
+      <% }) %>
+    </ul>
+  </main>
+  <footer>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </footer>
 </body>
 </html>
