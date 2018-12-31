@@ -10,23 +10,29 @@
 </head>
 <body>
   <header>
-    <h1>Best Books!</h1>
+    <img src="images/hamburger.png" alt="">
+    <h1><a href="/">Best Books!</a></h1>
   </header>
   <section>
-      <h2>Search by Title or Author</h2>
-    </section>
-    <main>
-      <ul>
-        <% books.forEach(book => { %>
-          <li>
-            <img src=<%=book.image %>>
-            <h3><%= book.title %></h3>
-            <p><em><%= book.author %></em></p>
-            <p><%= book.description %></p>
-          </li>
-        <% }) %>
-      </ul>
-    </main>
-
+    <h2>Search Results</h2>
+  </section>
+  <main>
+    <ul>
+      <% books.forEach(book => { %>
+        <li>
+          <img src=<%=book.image %>>
+          <h3><%= book.title %></h3>
+          <p><em><%= book.author %></em></p>
+          <p><%= book.description %></p>
+        </li>
+      <% }) %>
+    </ul>
+  </main>
+  <footer>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </footer>
 </body>
 </html>
