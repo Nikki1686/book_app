@@ -17,11 +17,11 @@ client.on('error', err => console.error(err));
 
 //app
 const app = express();
-app.set('view engine', 'ejs');
-
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
+
+app.set('view engine', 'ejs');
 
 app.get('/', home);
 app.get('/hello', hello);
@@ -76,5 +76,5 @@ function handleError(err, res) {
 }
 
 app.listen(PORT, () => {
-  console.log(`app is up on port : ${PORT}`);
+  console.log(`server is up on port : ${PORT}`);
 });
