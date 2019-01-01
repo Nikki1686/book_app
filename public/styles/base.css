@@ -39,6 +39,10 @@ section {
   margin-bottom: 20px;
 }
 
+section span {
+  font-style: italic
+}
+
 h2 {
   color: #eee;
   font-size: 130%;
@@ -69,6 +73,11 @@ button {
   background-color: #111;
   color: #eee;
   border: #111;
+  cursor: pointer;
+}
+
+li button {
+  width: 200px;
 }
 
 .text-input {
