@@ -5,17 +5,19 @@
 <body>
   <%- include('../layout/header') %>
 
-  <section>
+  <section id="subheader">
     <h2><span><%= books.length %></span> Saved Books</h2>
   </section>
   <main>
     <ul>
       <% books.forEach(book => { %>
-        <li>
-          <img src=<%=book.image_url %>>
+        <li data-id="<%= book.id %>">
+          <img src=<%= book.image_url %>>
           <h3><%= book.title %></h3>
           <p><em><%= book.author %></em></p>
-          <button>View Details</button> 
+          <a href="books/<%= book.id %>">
+            <button>View Details</button> 
+          </a>
         </li>
       <% }) %>
     </ul>

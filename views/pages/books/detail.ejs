@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
-</html>
+<section id=detail>
+  <img src=<%=book.image_url %>>
+  <h3><%= book.title %></h3>
+  <p><em><%= book.author %></em></p>
+  <p class="description"><%= book.description %></p>
+  <p><em>ISBN: <%= book.isbn %></em></p>
+  <p><em>Bookshelf: <%= book.bookshelf %></em></p>
+</section>
