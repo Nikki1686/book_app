@@ -1,18 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="styles/reset.css">
-  <link rel="stylesheet" href="styles/base.css">
-  <title>Book App</title>
-</head>
+<%- include('../layout/head') %>
+
 <body>
-  <header>
-    <img src="images/hamburger.png" alt="">
-    <h1><a href="/">Best Books!</a></h1>
-    </header>
+  <%- include('../layout/header') %>
+
   <section>
     <h2>Search by Title or Author</h2>
   </section>
@@ -37,11 +29,6 @@
     </form>
   </main>
 
-  <footer>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-  </footer>
+  <%- include('../layout/footer') %>
 </body>
 </html>

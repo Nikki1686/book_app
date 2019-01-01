@@ -47,7 +47,7 @@ h2 {
 main {
   background-color: #777;
   min-height: 100%;
-  margin-bottom: -50px;
+  /* margin-bottom: -50px; */
 }
 
 h3 {
