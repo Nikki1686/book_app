@@ -26,19 +26,25 @@ app.set('view engine', 'ejs');
 app.get('/', home);
 app.get('/hello', hello);
 app.post('/searches', search);
+app.get('/new', (req, res) => res.render('pages/searches/new'));
 
 
-function home(request, response){
-  response.render('pages/index');
+function home(req, res){
+  client.query(`SELECT * FROM books`)
+    .then(data => {
+      console.log(data.rows);
+      res.render('pages/index', {books: data.rows});
+    })
+    .catch(err => handleError(err, res));
 }
 
-function hello(request, response){
-  response.render('pages/index');
+function hello(req, res){
+  res.render('pages/index');
 }
 
-function search(request, response){
-  const searchStr = request.body.search[0];
-  const searchType = request.body.search[1];
+function search(req, res){
+  const searchStr = req.body.search[0];
+  const searchType = req.body.search[1];
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
 
   if(searchType === 'title'){
@@ -51,9 +57,9 @@ function search(request, response){
     .then(result => {
       // console.log(result.body.items[0]);
       let books = result.body.items.map(book => new Book(book));
-      response.render('pages/searches/shows', {books});
+      res.render('pages/searches/shows', {books});
     })
-    .catch(err => handleError(err, response));
+    .catch(err => handleError(err, res));
 
 }
 
@@ -65,8 +71,8 @@ function Book(book){
 }
 
 // Error messages
-app.get('/*', function(request, response) {
-  response.status(404).send('you are in the wrong place bozo');
+app.get('/*', function(req, res) {
+  res.status(404).send('you are in the wrong place bozo');
 });
 
 // Error handler

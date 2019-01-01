@@ -6,27 +6,20 @@
   <%- include('../layout/header') %>
 
   <section>
-    <h2>Search by Title or Author</h2>
+    <h2><span><%= books.length %></span> Saved Books</h2>
   </section>
   <main>
-
-    <form action="/searches" method="post">
-      <input class="text-input" type="text" name="search" placeholder="Enter a title or author" required>
-
-      <fieldset id="title-field">
-        <label for="title">
-          <span>Title</span>
-          <input class="radio-button" type="radio" name="search" value="title" required>
-        </label>
-      </fieldset>
-      <fieldset id="author-field">
-        <label for="author">
-          <span>Author</span>
-          <input class="radio-button" type="radio" name="search" value="author" required>
-        </label>
-      </fieldset>
-        <button type="submit">Search the Google Books API</button>
-    </form>
+    <ul>
+      <% books.forEach(book => { %>
+        <li>
+          <img src=<%=book.image_url %>>
+          <h3><%= book.title %></h3>
+          <p><em><%= book.author %></em></p>
+          <button>View Details</button> 
+        </li>
+      <% }) %>
+    </ul>
+    
   </main>
 
   <%- include('../layout/footer') %>

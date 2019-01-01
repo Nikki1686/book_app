@@ -1,12 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
+<%- include('../../layout/head') %>
+
 <body>
-  
+  <%- include('../../layout/header') %>
+
+  <section>
+    <h2>Search by Title or Author</h2>
+  </section>
+  <main>
+
+    <form action="/searches" method="post">
+      <input class="text-input" type="text" name="search" placeholder="Enter a title or author" required>
+
+      <fieldset id="title-field">
+        <label for="title">
+          <span>Title</span>
+          <input class="radio-button" type="radio" name="search" value="title" required>
+        </label>
+      </fieldset>
+      <fieldset id="author-field">
+        <label for="author">
+          <span>Author</span>
+          <input class="radio-button" type="radio" name="search" value="author" required>
+        </label>
+      </fieldset>
+        <button type="submit">Search the Google Books API</button>
+    </form>
+  </main>
+
+  <%- include('../../layout/footer') %>
 </body>
 </html>
