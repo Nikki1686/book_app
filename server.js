@@ -19,7 +19,7 @@ client.on('error', err => console.error(err));
 const app = express();
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('./public'));
 
 app.set('view engine', 'ejs');
 
@@ -27,12 +27,13 @@ app.get('/', home);
 app.get('/hello', hello);
 app.post('/searches', search);
 app.get('/new', (req, res) => res.render('pages/searches/new'));
+app.get('/books/:id', getOneBook);
 
 
 function home(req, res){
   client.query(`SELECT * FROM books`)
     .then(data => {
-      console.log(data.rows);
+      // console.log(data.rows);
       res.render('pages/index', {books: data.rows});
     })
     .catch(err => handleError(err, res));
@@ -63,6 +64,17 @@ function search(req, res){
 
 }
 
+function getOneBook(req, res) {
+  let SQL = 'SELECT * FROM books WHERE id=$1;';
+  let values = [req.params.id];
+
+  return client.query(SQL, values)
+    .then(result => res.render('pages/books/show', {book: result.rows[0]}))
+    .catch(err => handleError(err, res));
+}
+
+
+// Model
 function Book(book){
   this.title = book.volumeInfo.title || 'No title provided';
   this.author = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown';
