@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
+const methodOverride = require('method-override');
 
 //Load env vars;
 require('dotenv').config();
@@ -21,6 +22,16 @@ app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('./public'));
 
+app.use(methodOverride((req, res) => {
+  if(req.body && typeof req.body === 'object' && '_method' in req.body){
+    console.log(req.body['_method']);
+    let method = req.body['_method'];
+    delete req.body['_method'];
+    // returns PUT, PATCH, POST, GET, or DELETE
+    return method;
+  }
+}))
+
 app.set('view engine', 'ejs');
 
 
@@ -30,6 +41,7 @@ app.get('/searches', newSearch);
 app.post('/searches', search);
 app.get('/books/:id', getOneBook);
 app.post('/books', saveBook);
+app.put('/books/:id', updateBook);
 
 
 // handlers
@@ -100,6 +112,24 @@ function saveBook(req, res) {
           res.redirect(`/books/${result.rows[0].id}`);
         })
         .catch(err => handleError(err, res));
+    })
+    .catch(err => handleError(err, res));
+}
+
+function updateBook(req, res) {
+  let SQL = `UPDATE books SET 
+              title=$2,
+              author=$3,
+              isbn=$4,
+              image_url=$5,
+              description=$6,
+              bookshelf=$7
+              WHERE id=$1;`;
+  let values = [req.params.id, req.body.title, req.body.author, req.body.isbn, req.body.image_url, req.body.description, req.body.bookshelf];
+  
+  client.query(SQL, values)
+    .then(results => {
+      res.redirect(`/books/${req.params.id}`);
     })
     .catch(err => handleError(err, res));
 }
