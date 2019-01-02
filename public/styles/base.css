@@ -100,7 +100,7 @@ fieldset {
   margin-left: 20px;
 }
 
-.detail, li {
+.detail, main li {
   background-color: #bbb;
   padding: 30px 70px 30px 70px;
   margin: 40px;
@@ -150,4 +150,28 @@ footer {
   border-radius: 50%;
   background-color: #555;
   margin-top: 10px;
+}
+
+.bar {
+  width: 35px;
+  height: 5px;
+  background-color: #eee;
+  margin: 6px 0;
+}
+
+#hamburger {
+  float: right;
+  cursor: pointer;
+}
+
+header ul {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  /* display: none; */
+  z-index: 1;
+}
+
+header a {
+  text-decoration: none;
+  color: #eee;
 }
