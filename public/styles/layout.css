@@ -1,1 +1,57 @@
 /* layout */
+
+header img {
+  width: 50px;
+  float: right;
+}
+
+h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#subheader {
+  background-color: #444;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+#subheader span {
+  font-style: italic
+}
+
+.text-input, fieldset, button {
+  width: 80%;
+  border-radius: 5px;
+  margin:  30px auto 0 auto;
+  height: 70px;
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+.text-input {
+  padding-left: 20px;
+}
+
+fieldset {
+  text-align: left;
+  background-color: #ccc;
+  padding-top: 25px;
+  padding-left: 20px;
+}
+
+#hamburger {
+  float: right;
+  cursor: pointer;
+}
+
+#menu {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  /* display: none; */
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  top: 80px;
+  left: 0;
+}
