@@ -71,6 +71,7 @@ h3 {
 
 textarea.text-input {
   height: 140px;
+  padding: 20px;
 }
 
 button {

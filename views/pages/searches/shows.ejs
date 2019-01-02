@@ -17,21 +17,21 @@
           <p><%= book.description %></p>
           <button class="select-book">Select this Book</button>
         </li>
+        <section class="add-form detail">
+          <form action="/" method="post">
+            <input name="title" class="text-input" type="text" name="search"  value="<%= book.title %>" required>
+            <input name="author" class="text-input" type="text" name="search"  value="<%= book.author %>" required>
+            <input name="isbn" class="text-input" type="text" name="search"  value="<%= book.isbn %>"" required>
+            <input name="image-url" class="text-input" type="text" name="search" value="<%= book.image %>" required>
+            <textarea name="details" class="text-input" cols="30" rows="10" required><%= book.description %></textarea>
+            <input name="bookshelf" class="text-input" type="text" name="search" placeholder="Enter bookshelf name" required>
+            <button id="add-form-submit" type="submit">Add to Database</button>
+          </form>
+        </section>
       <% }) %>
     </ul>
   </main>
 
-  <section id="add-form" class="detail">
-    <form action="/" method="post">
-      <input name="title" class="text-input" type="text" name="search" required>
-      <input name="author" class="text-input" type="text" name="search" required>
-      <input name="isbn" class="text-input" type="text" name="search" required>
-      <input name="image-url" class="text-input" type="text" name="search" required>
-      <textarea name="details" class="text-input" cols="30" rows="10"></textarea>
-      <input name="bookshelf" class="text-input" type="text" name="search" placeholder="Enter bookshelf name" required>
-      <button type="submit">Add to Database</button>
-    </form>
-  </section>
 
   <%- include('../../layout/footer') %>
 
