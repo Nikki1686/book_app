@@ -141,7 +141,7 @@ function Book(book){
   this.author = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown';
   this.image_url = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpeg';
   this.description = book.volumeInfo.description || 'No description provided.';
-  this.isbn = book.volumeInfo.industryIdentifiers[0].identifier;
+  this.isbn = book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : 'Unknown ISBN';
 }
 
 // Error messages
