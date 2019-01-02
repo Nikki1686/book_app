@@ -69,7 +69,6 @@ function getOneBook(req, res) {
 }
 
 function saveBook(req, res) {
-  console.log(req.body.title);
   let SQL = 'INSERT INTO books(title, author, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
   let values = [req.body.title, req.body.author, req.body.isbn, req.body.image_url, req.body.description, req.body.bookshelf];
 

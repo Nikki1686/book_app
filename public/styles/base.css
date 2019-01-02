@@ -164,14 +164,28 @@ footer {
   cursor: pointer;
 }
 
-header ul {
+#menu {
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.8);
   /* display: none; */
   z-index: 1;
+  position: absolute;
+  width: 100%;
+  top: 80px;
+  left: 0;
 }
 
-header a {
+
+#menu li {
+  padding: 5px;
+}
+
+#menu li:hover {
+  background-color: rgba(40, 40, 40, 0.9);
+}
+
+#menu a {
+  display: block;
   text-decoration: none;
   color: #eee;
 }

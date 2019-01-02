@@ -1,6 +1,7 @@
 'use strict';
 
 $(() => {
+  // Show form in search results
   $('.add-form').hide();
   $('.select-book').on('click', e => {
     e.preventDefault();
@@ -10,12 +11,12 @@ $(() => {
     $(e.target).parent().next().show();
   });
 
-
+  // Toggle menu from hamburger button
   $('header ul').hide();
   $('#hamburger').on('click', e => {
     e.preventDefault();
     e.stopPropagation();
 
-    $('header ul').toggle();
+    $('#menu').toggle();
   })
 });
