@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../../layout/head') %>
+
+<body>
+  <%- include('../../layout/header') %>
+  <section id="subheader">
+    <h2>Search Results</h2>
+  </section>
+  <main>
+    <ul>
+      <% books.forEach(book => { %>
+        <li>
+          <img src=<%=book.image_url %>>
+          <h3><%= book.title %></h3>
+          <p><em><%= book.author %></em></p>
+          <p><%= book.description %></p>
+          <button class="select-book">Select this Book</button>
+        </li>
+        <%- include('../books/edit', {book: book}) %>
+      <% }) %>
+    </ul>
+  </main>
+
+
+  <%- include('../../layout/footer') %>
+
+  
+</body>
+</html>

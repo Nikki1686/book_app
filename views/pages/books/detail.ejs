@@ -5,4 +5,10 @@
   <p class="description"><%= book.description %></p>
   <p><em>ISBN: <%= book.isbn %></em></p>
   <p><em>Bookshelf: <%= book.bookshelf %></em></p>
+  <div class="buttons">
+    <button id="update-details">Update Details</button>
+    <button id="delete-book">Delete Book</button>
+  </div>
 </section>
+
+<%- include('edit') %>

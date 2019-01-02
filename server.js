@@ -5,33 +5,48 @@ const express = require('express');
 const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
+const methodOverride = require('method-override');
 
 //Load env vars;
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 
-//postgres
+// postgres
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', err => console.error(err));
 
-//app
+// app
 const app = express();
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('./public'));
 
+app.use(methodOverride((req, res) => {
+  if(req.body && typeof req.body === 'object' && '_method' in req.body){
+    console.log(req.body['_method']);
+    let method = req.body['_method'];
+    delete req.body['_method'];
+    // returns PUT, PATCH, POST, GET, or DELETE
+    return method;
+  }
+}))
+
 app.set('view engine', 'ejs');
 
+
+// routes
 app.get('/', home);
 app.get('/searches', newSearch);
 app.post('/searches', search);
 app.get('/books/:id', getOneBook);
 app.post('/books', saveBook);
+app.put('/books/:id', updateBook);
 
 
+// handlers
 function home(req, res){
-  client.query(`SELECT * FROM books`)
+  client.query('SELECT * FROM books')
     .then(data => {
       res.render('pages/index', {books: data.rows});
     })
@@ -57,7 +72,7 @@ function search(req, res){
     .then(result => {
       // console.log(result.body.items[0]);
       let books = result.body.items.map(book => new Book(book));
-      res.render('pages/searches/shows', {books});
+      res.render('pages/searches/show', {books});
     })
     .catch(err => handleError(err, res));
 
@@ -68,7 +83,18 @@ function getOneBook(req, res) {
   let values = [req.params.id];
 
   return client.query(SQL, values)
-    .then(result => res.render('pages/books/show', {book: result.rows[0]}))
+    .then(result => {
+      const book = result.rows[0];
+      return client.query('SELECT DISTINCT bookshelf FROM books;')
+        .then(bookshelfData => {
+          const bookshelves = bookshelfData.rows;
+          res.render('pages/books/show', {
+            book: book,
+            bookshelves: bookshelves,
+          });
+        })
+        .catch(err => handleError(err, res));
+    })
     .catch(err => handleError(err, res));
 }
 
@@ -90,12 +116,30 @@ function saveBook(req, res) {
     .catch(err => handleError(err, res));
 }
 
+function updateBook(req, res) {
+  let SQL = `UPDATE books SET 
+              title=$2,
+              author=$3,
+              isbn=$4,
+              image_url=$5,
+              description=$6,
+              bookshelf=$7
+              WHERE id=$1;`;
+  let values = [req.params.id, req.body.title, req.body.author, req.body.isbn, req.body.image_url, req.body.description, req.body.bookshelf];
+  
+  client.query(SQL, values)
+    .then(results => {
+      res.redirect(`/books/${req.params.id}`);
+    })
+    .catch(err => handleError(err, res));
+}
+
 
 // Model
 function Book(book){
   this.title = book.volumeInfo.title || 'No title provided';
   this.author = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown';
-  this.image = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpeg';
+  this.image_url = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpeg';
   this.description = book.volumeInfo.description || 'No description provided.';
   this.isbn = book.volumeInfo.industryIdentifiers[0].identifier;
 }
