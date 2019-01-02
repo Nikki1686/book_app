@@ -19,28 +19,8 @@ header {
 
 }
 
-header img {
-  width: 50px;
-  float: right;
-}
-
 h1 {
   font-size: 200%;
-}
-
-h1 a {
-  color: inherit;
-  text-decoration: none;
-}
-
-#subheader {
-  background-color: #444;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-#subheader span {
-  font-style: italic
 }
 
 h2 {
@@ -60,81 +40,6 @@ h3 {
   text-shadow: 1px 1px #111;
 }
 
-.text-input, fieldset, button {
-  width: 80%;
-  border-radius: 5px;
-  margin:  30px auto 0 auto;
-  height: 70px;
-  box-sizing: border-box;
-  font-size: 100%;
-}
-
-textarea.text-input {
-  height: 140px;
-  padding: 20px;
-}
-
-button {
-  background-color: #111;
-  color: #eee;
-  border: #111;
-  cursor: pointer;
-}
-
-li button {
-  width: 200px;
-}
-
-.text-input {
-  padding-left: 20px;
-}
-
-fieldset {
-  text-align: left;
-  background-color: #ccc;
-  padding-top: 25px;
-  padding-left: 20px;
-}
-
-.radio-button {
-  margin-left: 20px;
-}
-
-.detail, main li {
-  background-color: #bbb;
-  padding: 30px 70px 30px 70px;
-  margin: 40px;
-  border-radius: 5px;
-  box-shadow: 2px 2px 2px 1px #555;
-}
-
-li img, li p, .detail img, .detail p {
-  margin-bottom: 20px;
-}
-
-em {
-  font-style: italic;
-}
-
-li h3, .detail h3 {
-  margin-bottom: 10px;
-}
-
-li p, .detail p{
-  color: #333;
-}
-
-li p:nth-child(3) {
-  font-size: 90%;
-}
-
-li p:last-child, .description {
-  text-align: left;
-  background-color: #ddd;
-  padding: 20px;
-  border-radius: 5px;
-}
-
 footer {
   background-color: #000;
   height: 50px;
@@ -142,36 +47,4 @@ footer {
   bottom: 0px;
   display: flex;
   justify-content: space-around;
-}
-
-.circle {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #555;
-  margin-top: 10px;
-}
-
-.bar {
-  width: 35px;
-  height: 5px;
-  background-color: #eee;
-  margin: 6px 0;
-}
-
-#hamburger {
-  float: right;
-  cursor: pointer;
-}
-
-header ul {
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.9);
-  /* display: none; */
-  z-index: 1;
-}
-
-header a {
-  text-decoration: none;
-  color: #eee;
 }

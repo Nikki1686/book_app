@@ -24,10 +24,10 @@ app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 
 app.get('/', home);
+app.get('/searches', newSearch);
 app.post('/searches', search);
-app.get('/new', (req, res) => res.render('pages/searches/new'));
 app.get('/books/:id', getOneBook);
-app.post('/save', saveBook);
+app.post('/books', saveBook);
 
 
 function home(req, res){
@@ -36,6 +36,10 @@ function home(req, res){
       res.render('pages/index', {books: data.rows});
     })
     .catch(err => handleError(err, res));
+}
+
+function newSearch(req, res) {
+  res.render('pages/searches/new');
 }
 
 function search(req, res){
@@ -69,7 +73,6 @@ function getOneBook(req, res) {
 }
 
 function saveBook(req, res) {
-  console.log(req.body.title);
   let SQL = 'INSERT INTO books(title, author, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
   let values = [req.body.title, req.body.author, req.body.isbn, req.body.image_url, req.body.description, req.body.bookshelf];
 
