@@ -10,12 +10,12 @@ const pg = require('pg');
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 
-//postgres
+// postgres
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', err => console.error(err));
 
-//app
+// app
 const app = express();
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
@@ -23,6 +23,8 @@ app.use(express.static('./public'));
 
 app.set('view engine', 'ejs');
 
+
+// routes
 app.get('/', home);
 app.get('/searches', newSearch);
 app.post('/searches', search);
@@ -30,8 +32,9 @@ app.get('/books/:id', getOneBook);
 app.post('/books', saveBook);
 
 
+// handlers
 function home(req, res){
-  client.query(`SELECT * FROM books`)
+  client.query('SELECT * FROM books')
     .then(data => {
       res.render('pages/index', {books: data.rows});
     })
@@ -57,7 +60,7 @@ function search(req, res){
     .then(result => {
       // console.log(result.body.items[0]);
       let books = result.body.items.map(book => new Book(book));
-      res.render('pages/searches/shows', {books});
+      res.render('pages/searches/show', {books});
     })
     .catch(err => handleError(err, res));
 
@@ -68,7 +71,18 @@ function getOneBook(req, res) {
   let values = [req.params.id];
 
   return client.query(SQL, values)
-    .then(result => res.render('pages/books/show', {book: result.rows[0]}))
+    .then(result => {
+      const book = result.rows[0];
+      return client.query('SELECT DISTINCT bookshelf FROM books;')
+        .then(bookshelfData => {
+          const bookshelves = bookshelfData.rows;
+          res.render('pages/books/show', {
+            book: book,
+            bookshelves: bookshelves,
+          });
+        })
+        .catch(err => handleError(err, res));
+    })
     .catch(err => handleError(err, res));
 }
 
@@ -95,7 +109,7 @@ function saveBook(req, res) {
 function Book(book){
   this.title = book.volumeInfo.title || 'No title provided';
   this.author = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown';
-  this.image = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpeg';
+  this.image_url = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpeg';
   this.description = book.volumeInfo.description || 'No description provided.';
   this.isbn = book.volumeInfo.industryIdentifiers[0].identifier;
 }

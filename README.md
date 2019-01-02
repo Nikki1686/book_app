@@ -16,11 +16,13 @@ nodemon
 ## Architecture
 Book App uses a node server and EJS server-side rendering. It makes superagent API requests to the Google Books API to get book information. jQuery is used for front-end interactivity.
 
+---
+
 ## Change Log
 
 ### Lab 11 - 2018.12.29
 
-### Feature 1
+#### Feature 1
 
 Number and name of feature: Feature 1 - server-side rendering
 
@@ -32,7 +34,7 @@ Finish time: 1030
 
 Actual time needed to complete: 45 minutes
 
-### Feature 2
+#### Feature 2
 
 Number and name of feature: Feature 2 - Search the Google Books API
 
@@ -44,7 +46,7 @@ Finish time: 1200
 
 Actual time needed to complete: 1hr 15min
 
-### Feature 3 
+#### Feature 3 
 
 Number and name of feature: Feature 3 - Display Search Results
 
@@ -56,7 +58,7 @@ Finish time: 1220
 
 Actual time needed to complete: 20 min
 
-### Feature 4 
+#### Feature 4 
 
 Number and name of feature: Feature 4 - Error Handling
 
@@ -68,7 +70,7 @@ Finish time: 1400
 
 Actual time needed to complete: 30 minutes
 
-### Feature 5 
+#### Feature 5 
 
 Number and name of feature: Feature 5 - Style the Book Application
 
@@ -83,7 +85,7 @@ Actual time needed to complete: 1 hr
 ---
 ### Lab 12 - 2019.01.01
 
-### Feature 1 
+#### Feature 1 
 
 Number and name of feature: Feature 1 - Show saved books
 
@@ -95,7 +97,7 @@ Finish time: 1100
 
 Actual time needed to complete: 2 hours
 
-### Feature 2 
+#### Feature 2 
 
 Number and name of feature: Feature 2 - Show details view
 
@@ -107,7 +109,7 @@ Finish time: 1200
 
 Actual time needed to complete: 1hr 
 
-### Feature 3 
+#### Feature 3 
 
 Number and name of feature: Feature 3 - Modify API-profided content
 
@@ -119,7 +121,7 @@ Finish time: 1500
 
 Actual time needed to complete: 3 hours
 
-### Feature 4 
+#### Feature 4 
 
 Number and name of feature: Feature 4 - Save new book to collection
 
@@ -131,7 +133,7 @@ Finish time: 1600
 
 Actual time needed to complete: 1 hour
 
-### Feature 5 
+#### Feature 5 
 
 Number and name of feature: Feature 5 - Consistent rendering
 
@@ -143,9 +145,9 @@ Finish time: 1630
 
 Actual time needed to complete: 30 minutes
 
-### Feature 5 
+#### Feature 6 
 
-Number and name of feature: Feature 5 - Continue to style
+Number and name of feature: Feature 6 - Continue to style
 
 Estimate of time needed to complete: 1 hr
 

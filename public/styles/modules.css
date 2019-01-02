@@ -83,3 +83,14 @@ li p:last-child, .description {
   text-decoration: none;
   color: #eee;
 }
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons button {
+
+  width: 200px;
+  margin: 0 10px;
+}

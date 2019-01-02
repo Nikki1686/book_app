@@ -1,0 +1,20 @@
+<section class="add-form detail">
+  <form action="/books" method="<%= book.bookshelf ? 'put' : 'post' %>">
+    <input name="title" class="text-input" type="text" name="search"  value="<%= book.title %>" required>
+    <input name="author" class="text-input" type="text" name="search"  value="<%= book.author %>" required>
+    <input name="isbn" class="text-input" type="text" name="search"  value="<%= book.isbn %>"" required>
+    <input name="image_url" class="text-input" type="text" name="search" value="<%= book.image_url %>" required>
+    <textarea name="description" class="text-input" cols="30" rows="10" required><%= book.description %></textarea>
+
+    <% if (!book.bookshelf) { %>
+      <input name="bookshelf" class="text-input" type="text" name="search" placeholder="Enter bookshelf name" value="<%= book.bookshelf || '' %>" required>
+    <% } else { %>
+      <select name="bookshelf" value="<%= book.bookshelf %>">
+        <% bookshelves.forEach(bookshelf => { %>
+          <option value="<%= bookshelf.bookshelf %>" <%= book.bookshelf === bookshelf.bookshelf ? 'selected' : '' %>><%= bookshelf.bookshelf %></option>
+        <% }) %>
+      </select>
+    <% } %>
+    <button id="add-form-submit" type="submit"><%= book.bookshelf ? 'Update Book' : 'Add to Database' %></button>
+  </form>
+</section>
