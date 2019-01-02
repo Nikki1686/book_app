@@ -15,10 +15,30 @@
           <h3><%= book.title %></h3>
           <p><em><%= book.author %></em></p>
           <p><%= book.description %></p>
+          <button class="select-book">Select this Book</button>
         </li>
       <% }) %>
     </ul>
   </main>
+
+  <section id="add-form" class="detail">
+    <form action="/" method="post">
+      <input name="title" class="text-input" type="text" name="search" required>
+      <input name="author" class="text-input" type="text" name="search" required>
+      <input name="isbn" class="text-input" type="text" name="search" required>
+      <input name="image-url" class="text-input" type="text" name="search" required>
+      <textarea name="details" class="text-input" cols="30" rows="10"></textarea>
+      <input name="bookshelf" class="text-input" type="text" name="search" placeholder="Enter bookshelf name" required>
+      <button type="submit">Add to Database</button>
+    </form>
+  </section>
+
   <%- include('../../layout/footer') %>
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
