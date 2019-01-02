@@ -24,13 +24,11 @@ app.use(express.static('./public'));
 
 app.use(methodOverride((req, res) => {
   if(req.body && typeof req.body === 'object' && '_method' in req.body){
-    console.log(req.body['_method']);
     let method = req.body['_method'];
     delete req.body['_method'];
-    // returns PUT, PATCH, POST, GET, or DELETE
     return method;
   }
-}))
+}));
 
 app.set('view engine', 'ejs');
 
@@ -42,6 +40,7 @@ app.post('/searches', search);
 app.get('/books/:id', getOneBook);
 app.post('/books', saveBook);
 app.put('/books/:id', updateBook);
+app.delete('/books/:id', deleteBook);
 
 
 // handlers
@@ -131,6 +130,17 @@ function updateBook(req, res) {
     .then(results => {
       res.redirect(`/books/${req.params.id}`);
     })
+    .catch(err => handleError(err, res));
+}
+
+function deleteBook(req, res) {
+  let SQL = 'DELETE FROM books WHERE id=$1';
+  let values = [req.params.id];
+
+  client.query(SQL, values)
+    .then(result => {
+      res.redirect('/');
+    }) 
     .catch(err => handleError(err, res));
 }
 
