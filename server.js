@@ -24,13 +24,11 @@ app.use(express.static('./public'));
 
 app.use(methodOverride((req, res) => {
   if(req.body && typeof req.body === 'object' && '_method' in req.body){
-    console.log(req.body['_method']);
     let method = req.body['_method'];
     delete req.body['_method'];
-    // returns PUT, PATCH, POST, GET, or DELETE
     return method;
   }
-}))
+}));
 
 app.set('view engine', 'ejs');
 
@@ -42,6 +40,7 @@ app.post('/searches', search);
 app.get('/books/:id', getOneBook);
 app.post('/books', saveBook);
 app.put('/books/:id', updateBook);
+app.delete('/books/:id', deleteBook);
 
 
 // handlers
@@ -134,6 +133,17 @@ function updateBook(req, res) {
     .catch(err => handleError(err, res));
 }
 
+function deleteBook(req, res) {
+  let SQL = 'DELETE FROM books WHERE id=$1';
+  let values = [req.params.id];
+
+  client.query(SQL, values)
+    .then(result => {
+      res.redirect('/');
+    }) 
+    .catch(err => handleError(err, res));
+}
+
 
 // Model
 function Book(book){
@@ -141,7 +151,7 @@ function Book(book){
   this.author = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown';
   this.image_url = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpeg';
   this.description = book.volumeInfo.description || 'No description provided.';
-  this.isbn = book.volumeInfo.industryIdentifiers[0].identifier;
+  this.isbn = book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : 'Unknown ISBN';
 }
 
 // Error messages

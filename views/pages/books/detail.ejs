@@ -7,7 +7,10 @@
   <p><em>Bookshelf: <%= book.bookshelf %></em></p>
   <div class="buttons">
     <button id="update-details">Update Details</button>
-    <button id="delete-book">Delete Book</button>
+    <form action="/books/<%= book.id %>" method="post">
+      <input type="hidden" name="_method" value="DELETE">
+      <button type="submit" id="delete-book">Delete Book</button>
+    </form>
   </div>
 </section>
 
