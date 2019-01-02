@@ -27,6 +27,7 @@ app.get('/', home);
 app.post('/searches', search);
 app.get('/new', (req, res) => res.render('pages/searches/new'));
 app.get('/books/:id', getOneBook);
+app.post('/save', saveBook);
 
 
 function home(req, res){
@@ -64,6 +65,25 @@ function getOneBook(req, res) {
 
   return client.query(SQL, values)
     .then(result => res.render('pages/books/show', {book: result.rows[0]}))
+    .catch(err => handleError(err, res));
+}
+
+function saveBook(req, res) {
+  console.log(req.body.title);
+  let SQL = 'INSERT INTO books(title, author, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
+  let values = [req.body.title, req.body.author, req.body.isbn, req.body.image_url, req.body.description, req.body.bookshelf];
+
+  return client.query(SQL, values)
+    .then(result => {
+      let SQL = 'SELECT id FROM books WHERE isbn=$1;';
+      let values = [req.body.isbn];
+
+      return client.query(SQL, values)
+        .then(result => {
+          res.redirect(`/books/${result.rows[0].id}`);
+        })
+        .catch(err => handleError(err, res));
+    })
     .catch(err => handleError(err, res));
 }
 
