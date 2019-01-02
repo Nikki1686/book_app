@@ -24,7 +24,6 @@ app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 
 app.get('/', home);
-app.get('/hello', hello);
 app.post('/searches', search);
 app.get('/new', (req, res) => res.render('pages/searches/new'));
 app.get('/books/:id', getOneBook);
@@ -33,14 +32,9 @@ app.get('/books/:id', getOneBook);
 function home(req, res){
   client.query(`SELECT * FROM books`)
     .then(data => {
-      // console.log(data.rows);
       res.render('pages/index', {books: data.rows});
     })
     .catch(err => handleError(err, res));
-}
-
-function hello(req, res){
-  res.render('pages/index');
 }
 
 function search(req, res){
@@ -80,6 +74,7 @@ function Book(book){
   this.author = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown';
   this.image = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpeg';
   this.description = book.volumeInfo.description || 'No description provided.';
+  this.isbn = book.volumeInfo.industryIdentifiers[0].identifier;
 }
 
 // Error messages
