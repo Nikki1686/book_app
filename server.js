@@ -1,22 +1,22 @@
 'use strict';
 
-//App Dependencies
+// Load Dependencies
 const express = require('express');
 const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
 const methodOverride = require('method-override');
 
-//Load env vars;
+// Load env vars;
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 
-// postgres
+// PostgresQL setup
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', err => console.error(err));
 
-// app
+// App setup, configure, and middlewares
 const app = express();
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
@@ -33,7 +33,7 @@ app.use(methodOverride((req, res) => {
 app.set('view engine', 'ejs');
 
 
-// routes
+// Routes
 app.get('/', home);
 app.get('/searches', newSearch);
 app.post('/searches', search);
@@ -43,7 +43,7 @@ app.put('/books/:id', updateBook);
 app.delete('/books/:id', deleteBook);
 
 
-// handlers
+// Handles
 function home(req, res){
   client.query('SELECT * FROM books')
     .then(data => {
@@ -181,6 +181,7 @@ function handleError(err, res) {
   });
 }
 
+// App listening on PORT
 app.listen(PORT, () => {
   console.log(`server is up on port : ${PORT}`);
 });

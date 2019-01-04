@@ -93,3 +93,16 @@ li p:last-child, .description {
   width: 200px;
   margin: 0 10px;
 }
+
+.cancel-container {
+  margin-top: 20px;
+}
+
+.cancel-container a {
+  text-decoration: none;
+  color: darkred;
+}
+
+.cancel-container a:hover {
+  color: red;
+}
