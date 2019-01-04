@@ -47,7 +47,10 @@ app.delete('/books/:id', deleteBook);
 function home(req, res){
   client.query('SELECT * FROM books')
     .then(data => {
-      res.render('pages/index', {books: data.rows});
+      res.render('pages/index', {
+        books: data.rows, 
+        view: 'index'
+      });
     })
     .catch(err => handleError(err, res));
 }
@@ -69,9 +72,15 @@ function search(req, res){
 
   return superagent.get(url)
     .then(result => {
-      // console.log(result.body.items[0]);
+      // console.log(result.body);
+      if (result.body.totalItems === 0) {
+        return handleError('No results found', res);
+      }
       let books = result.body.items.map(book => new Book(book));
-      res.render('pages/searches/show', {books});
+      res.render('pages/searches/show', {
+        books: books, 
+        view: 'searches'
+      });
     })
     .catch(err => handleError(err, res));
 
@@ -90,6 +99,7 @@ function getOneBook(req, res) {
           res.render('pages/books/show', {
             book: book,
             bookshelves: bookshelves,
+            view: 'detail'
           });
         })
         .catch(err => handleError(err, res));
@@ -162,7 +172,7 @@ app.get('/*', function(req, res) {
 // Error handler
 function handleError(err, res) {
   console.error(err);
-  if (res) res.status(500).render('pages/error');
+  if (res) res.status(500).render('pages/error', {errorMessage: err});
 }
 
 app.listen(PORT, () => {

@@ -2,16 +2,35 @@
   <img src=<%=book.image_url %>>
   <h3><%= book.title %></h3>
   <p><em><%= book.author %></em></p>
-  <p class="description"><%= book.description %></p>
-  <p><em>ISBN: <%= book.isbn %></em></p>
-  <p><em>Bookshelf: <%= book.bookshelf %></em></p>
-  <div class="buttons">
-    <button id="update-details">Update Details</button>
-    <form action="/books/<%= book.id %>" method="post">
-      <input type="hidden" name="_method" value="DELETE">
-      <button type="submit" id="delete-book">Delete Book</button>
-    </form>
-  </div>
+
+  <% if (view === 'index') { %>
+    <a href="books/<%= book.id %>">
+      <button>View Details</button> 
+    </a>
+  <% } %>
+
+  <% if (view !== 'index') { %>
+    <p class="description"><%= book.description %></p>
+  <% } %>
+
+  <% if (view === 'searches') { %>
+    <button class="select-book">Select this Book</button>
+  <% } %>
+  
+  <% if (view === 'detail') { %>
+    <p><em>ISBN: <%= book.isbn %></em></p>
+    <p><em>Bookshelf: <%= book.bookshelf %></em></p>
+    <div class="buttons">
+      <button id="update-details">Update Details</button>
+      <form action="/books/<%= book.id %>" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" id="delete-book">Delete Book</button>
+      </form>
+    </div>
+  <% } %>
+
 </section>
 
-<%- include('edit') %>
+<% if (view === 'detail') { %>
+  <%- include('edit') %>
+<% } %>

@@ -8,20 +8,11 @@
   <section id="subheader">
     <h2><span><%= books.length %></span> Saved Books</h2>
   </section>
+  
   <main>
-    <ul>
       <% books.forEach(book => { %>
-        <li data-id="<%= book.id %>">
-          <img src=<%= book.image_url %>>
-          <h3><%= book.title %></h3>
-          <p><em><%= book.author %></em></p>
-          <a href="books/<%= book.id %>">
-            <button>View Details</button> 
-          </a>
-        </li>
+          <%- include('books/detail', {book: book}) %>
       <% }) %>
-    </ul>
-    
   </main>
 
   <%- include('../layout/footer') %>
