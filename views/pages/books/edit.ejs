@@ -1,4 +1,4 @@
-<section class="add-form detail">
+<section id="form-<%= book.bookshelf ? book.id : index %>" class="edit-form bubble-container">
   <form action="/books/<%= book.bookshelf ? book.id : '' %>" method="post">
     <% if (book.bookshelf) { %>
       <input type="hidden" name="_method" value="PUT">
@@ -24,7 +24,7 @@
       <% if (book.bookshelf) { %>
         <a href="/books/<%= book.id %>">Cancel</a>
       <% } else { %>
-        <a class="cancel-add" href="#">Cancel</a>
+        <a id="<%= 'cancel-' + index %>" class="cancel" href="#">Cancel</a>
       <% } %>
     </div>
   </form>

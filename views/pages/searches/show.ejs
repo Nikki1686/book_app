@@ -12,9 +12,15 @@
     }) %>
   
     <main>
-      <% books.forEach(book => { %>
-        <%- include('../books/detail', {book: book}) %>
-        <%- include('../books/edit', {book: book}) %>
+      <% books.forEach((book, index) => { %>
+        <%- include('../books/detail', {
+          book: book,
+          index: index
+        }) %>
+        <%- include('../books/edit', {
+          book: book,
+          index: index
+        }) %>
       <% }) %>
     </main>
 

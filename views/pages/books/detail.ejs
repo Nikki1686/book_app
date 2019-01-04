@@ -1,4 +1,4 @@
-<section class=detail>
+<section id="card-<%= book.bookshelf ? book.id : index %>" class="bubble-container">
   <img src=<%=book.image_url %>>
   <h3><%= book.title %></h3>
   <p><em><%= book.author %></em></p>
@@ -14,14 +14,14 @@
   <% } %>
 
   <% if (view === 'searches') { %>
-    <button class="select-book">Select this Book</button>
+    <button id="button-<%= index %>" class="select-book">Select this Book</button>
   <% } %>
   
   <% if (view === 'detail') { %>
     <p><em>ISBN: <%= book.isbn %></em></p>
     <p><em>Bookshelf: <%= book.bookshelf %></em></p>
     <div class="buttons">
-      <button id="update-details">Update Details</button>
+      <button id="button-<%= book.id %>" class="update-details">Update Details</button>
       <form action="/books/<%= book.id %>" method="post">
         <input type="hidden" name="_method" value="DELETE">
         <button type="submit" id="delete-book">Delete Book</button>
@@ -30,7 +30,3 @@
   <% } %>
 
 </section>
-
-<% if (view === 'detail') { %>
-  <%- include('edit') %>
-<% } %>

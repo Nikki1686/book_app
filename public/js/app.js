@@ -1,45 +1,46 @@
 'use strict';
 
 $(() => {
-  // always hide the editable forms
-  $('.add-form').hide();
+  // first hide the relevant forms
+  $('.edit-form').hide();
 
   // Event helper
   function eventHelper(e) {
     e.preventDefault();
     e.stopPropagation();
   }
+
+  // Toggle form and card
+  function toggleFormAndCard(e) {
+    const id = $(e.target).attr('id').split('-')[1];
+    const cardId = '#card-' + id;
+    const formId = '#form-' + id;
+    $(cardId).toggle();
+    $(formId).toggle();
+  }
   
   // show form in search results
   $('.select-book').on('click', e => {
     eventHelper(e);
-
-    $(e.target).parent().hide();
-    $(e.target).parent().next().show();
+    toggleFormAndCard(e);
   });
-
-  // hide form on cancel click in search results
-  $('.cancel-add').on('click', e => {
-    eventHelper(e);
-
-    $(e.target).parent().parent().parent().hide();
-    $(e.target).parent().parent().parent().prev().show();
-  });
-
+  
   // show form in details view
-  $('#update-details').on('click', e => {
+  $('.update-details').on('click', e => {
     eventHelper(e);
-
-    $(e.target).parent().parent().hide();
-    $(e.target).parent().parent().next().show();
+    toggleFormAndCard(e);
   });
-
+  
+  // hide form on cancel
+  $('.cancel').on('click', e => {
+    eventHelper(e);
+    toggleFormAndCard(e);
+  });
 
   // Toggle menu from hamburger button
   $('#menu').hide();
   $('#hamburger').on('click', e => {
     eventHelper(e);
-
     $('#menu').toggle();
   });
 });
