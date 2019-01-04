@@ -5,9 +5,14 @@
 <body>
   <%- include('../layout/header') %>
 
-  <section id="subheader">
+  <!-- <section id="subheader">
     <h2><span><%= books.length %></span> Saved Books</h2>
-  </section>
+  </section> -->
+
+  <%- include('../layout/subheader', {
+    message: 'Saved Books',
+    index: true
+  }) %>
   
   <main>
       <% books.forEach(book => { %>
