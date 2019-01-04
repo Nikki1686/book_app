@@ -2,16 +2,19 @@
 <html lang="en">
 <%- include('../layout/head') %>
 <body>
-  <%- include('../layout/header') %>
-
-  <%- include('../layout/subheader', {
-    message: 'Sever Error',
-    index: false
-  }) %>
-
-  <main>
-    <p><%= errorMessage %></p>
-  </main>
+  <div class="wrapper">
+    <%- include('../layout/header') %>
+  
+    <%- include('../layout/subheader', {
+      message: 'Sever Error',
+      index: false
+    }) %>
+  
+    <main>
+      <p><%= error %></p>
+    </main>
+    <div class="push"></div>
+  </div>
 
   <%- include('../layout/footer') %>
 </body>

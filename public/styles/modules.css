@@ -20,13 +20,17 @@ li button {
   margin-left: 20px;
 }
 
-.detail, main li {
+.detail {
   background-color: #bbb;
   padding: 30px 70px 30px 70px;
   margin: 40px;
   border-radius: 5px;
   box-shadow: 2px 2px 2px 1px #555;
 }
+
+/* main:last-child {
+  margin-bottom: 40px;
+} */
 
 li img, li p, .detail img, .detail p {
   margin-bottom: 20px;

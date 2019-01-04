@@ -3,20 +3,22 @@
 <%- include('../../layout/head') %>
 
 <body>
-  <%- include('../../layout/header') %>
-  <!-- <section id="subheader">
-    <h2>Search Results</h2>
-  </section> -->
-  <%- include('../../layout/subheader', {
-    message: 'Search Results',
-    index: false
-  }) %>
-  <main>
-    <% books.forEach(book => { %>
-      <%- include('../books/detail', {book: book}) %>
-      <%- include('../books/edit', {book: book}) %>
-    <% }) %>
-  </main>
+  <div class="wrapper">
+    <%- include('../../layout/header') %>
+  
+    <%- include('../../layout/subheader', {
+      message: 'Search Results',
+      index: false
+    }) %>
+  
+    <main>
+      <% books.forEach(book => { %>
+        <%- include('../books/detail', {book: book}) %>
+        <%- include('../books/edit', {book: book}) %>
+      <% }) %>
+    </main>
+    <div class="push"></div>
+  </div>
 
   <%- include('../../layout/footer') %>
 </body>

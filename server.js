@@ -72,7 +72,6 @@ function search(req, res){
 
   return superagent.get(url)
     .then(result => {
-      // console.log(result.body);
       if (result.body.totalItems === 0) {
         return handleError('No results found', res);
       }
@@ -172,7 +171,7 @@ app.get('/*', function(req, res) {
 // Error handler
 function handleError(err, res) {
   console.error(err);
-  if (res) res.status(500).render('pages/error', {errorMessage: err});
+  if (res) res.status(500).render('pages/error', {error: err});
 }
 
 app.listen(PORT, () => {
