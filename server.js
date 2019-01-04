@@ -163,15 +163,22 @@ function Book(book){
   this.isbn = book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : 'Unknown ISBN';
 }
 
-// Error messages
+
+// Page not found handler
 app.get('/*', function(req, res) {
-  res.status(404).send('you are in the wrong place bozo');
+  res.status(404).render('pages/error', {
+    message: 'Page does not exist',
+    error: 'You are in the wrong place bozo',
+  })
 });
 
-// Error handler
+// Server error handler
 function handleError(err, res) {
   console.error(err);
-  if (res) res.status(500).render('pages/error', {error: err});
+  if (res) res.status(500).render('pages/error', {
+    message: 'Server Error',
+    error: err
+  });
 }
 
 app.listen(PORT, () => {

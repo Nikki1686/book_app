@@ -28,10 +28,6 @@ li button {
   box-shadow: 2px 2px 2px 1px #555;
 }
 
-/* main:last-child {
-  margin-bottom: 40px;
-} */
-
 li img, li p, .detail img, .detail p {
   margin-bottom: 20px;
 }
@@ -94,7 +90,6 @@ li p:last-child, .description {
 }
 
 .buttons button {
-
   width: 200px;
   margin: 0 10px;
 }
