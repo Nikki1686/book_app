@@ -3,31 +3,21 @@
 <%- include('../../layout/head') %>
 
 <body>
-  <%- include('../../layout/header') %>
+  <div class="wrapper">
+    <%- include('../../layout/header') %>
 
-  <section id="subheader">
-    <h2>Search by Title or Author</h2>
-  </section>
-  <main>
+    <%- include('../../layout/subheader', {
+      message: 'Search by Title of Author',
+      index: false
+    }) %>
 
-    <form action="/searches" method="post">
-      <input class="text-input" type="text" name="search" placeholder="Enter a title or author" required>
+    <main>
+      <%- include('search-form') %>
+    </main>
 
-      <fieldset id="title-field">
-        <label for="title">
-          <span>Title</span>
-          <input class="radio-button" type="radio" name="search" value="title" required>
-        </label>
-      </fieldset>
-      <fieldset id="author-field">
-        <label for="author">
-          <span>Author</span>
-          <input class="radio-button" type="radio" name="search" value="author" required>
-        </label>
-      </fieldset>
-        <button type="submit">Search the Google Books API</button>
-    </form>
-  </main>
+    <!-- This empty div is a CSS trick to keep the footer sticky at the bottom -->
+    <div class="push"></div>
+  </div>
 
   <%- include('../../layout/footer') %>
 </body>

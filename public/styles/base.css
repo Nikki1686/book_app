@@ -3,6 +3,7 @@
 html, body {
   height: 100%;
   margin: 0;
+
 }
 
 body {
@@ -31,7 +32,6 @@ h2 {
 main {
   background-color: #777;
   min-height: 100%;
-  /* margin-bottom: -50px; */
 }
 
 h3 {
@@ -47,4 +47,14 @@ footer {
   bottom: 0px;
   display: flex;
   justify-content: space-around;
+}
+
+/* These two below keep the footer sicky at bottom */
+.push {
+  height: 50px;
+}
+
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -50px;
 }

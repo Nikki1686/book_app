@@ -3,11 +3,22 @@
 <%- include('../../layout/head') %>
 
 <body>
-  <%- include('../../layout/header') %>
+  <div class="wrapper">
+    <%- include('../../layout/header') %>
+  
+    <%- include('../../layout/subheader', {
+      message: 'Book Details',
+      index: false
+    }) %>
+  
+    <main>
+      <%- include('detail') %>
+      <%- include('edit') %>
+    </main>
 
-  <main>
-    <%- include('./detail') %>
-  </main>
+    <!-- This empty div is a CSS trick to keep the footer sticky at the bottom -->
+    <div class="push"></div>
+  </div>
 
   <%- include('../../layout/footer') %>
 </body>

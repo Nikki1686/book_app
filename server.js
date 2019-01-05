@@ -1,22 +1,22 @@
 'use strict';
 
-//App Dependencies
+// Load Dependencies
 const express = require('express');
 const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
 const methodOverride = require('method-override');
 
-//Load env vars;
+// Load env vars;
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 
-// postgres
+// PostgresQL setup
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', err => console.error(err));
 
-// app
+// App setup, configure, and middlewares
 const app = express();
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
@@ -33,7 +33,7 @@ app.use(methodOverride((req, res) => {
 app.set('view engine', 'ejs');
 
 
-// routes
+// Routes
 app.get('/', home);
 app.get('/searches', newSearch);
 app.post('/searches', search);
@@ -43,7 +43,7 @@ app.put('/books/:id', updateBook);
 app.delete('/books/:id', deleteBook);
 
 
-// handlers
+// Handles
 function home(req, res){
   client.query('SELECT * FROM books')
     .then(data => {
@@ -72,7 +72,6 @@ function search(req, res){
 
   return superagent.get(url)
     .then(result => {
-      // console.log(result.body);
       if (result.body.totalItems === 0) {
         return handleError('No results found', res);
       }
@@ -164,17 +163,25 @@ function Book(book){
   this.isbn = book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : 'Unknown ISBN';
 }
 
-// Error messages
+
+// Page not found handler
 app.get('/*', function(req, res) {
-  res.status(404).send('you are in the wrong place bozo');
+  res.status(404).render('pages/error', {
+    message: 'Page does not exist',
+    error: 'You are in the wrong place bozo',
+  })
 });
 
-// Error handler
+// Server error handler
 function handleError(err, res) {
   console.error(err);
-  if (res) res.status(500).render('pages/error', {errorMessage: err});
+  if (res) res.status(500).render('pages/error', {
+    message: 'Server Error',
+    error: err
+  });
 }
 
+// App listening on PORT
 app.listen(PORT, () => {
   console.log(`server is up on port : ${PORT}`);
 });
